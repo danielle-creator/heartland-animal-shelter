@@ -1,6 +1,6 @@
 /*
  * HEARTLAND ANIMAL SHELTER — Get Involved Page
- * Design: Editorial Warmth — red/teal accents, Playfair Display + DM Sans
+ * Design: Editorial Warmth — red/teal accents, Plus Jakarta Sans + DM Sans
  * Sections: Hero, Volunteer, Foster, Other Ways to Help
  */
 import { Link } from "wouter";
@@ -39,7 +39,7 @@ export default function GetInvolved() {
         <div className="absolute inset-0 flex items-center">
           <div className="container">
             <div className="text-[#0D9488] text-xs font-bold uppercase tracking-widest mb-2" style={{fontFamily:'DM Sans, sans-serif'}}>Make a Difference</div>
-            <h1 className="text-4xl md:text-5xl font-black text-white" style={{fontFamily:'Playfair Display, serif'}}>
+            <h1 className="text-4xl md:text-5xl font-black text-white" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>
               Get Involved
             </h1>
             <p className="text-white/90 mt-2 text-lg" style={{fontFamily:'DM Sans, sans-serif'}}>
@@ -74,7 +74,7 @@ export default function GetInvolved() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <div className="text-[#C8102E] text-xs font-bold uppercase tracking-widest mb-3" style={{fontFamily:'DM Sans, sans-serif'}}>Join Our Team</div>
-              <h2 className="text-3xl md:text-4xl font-black text-[#1C1917] mb-4" style={{fontFamily:'Playfair Display, serif'}}>
+              <h2 className="text-3xl md:text-4xl font-black text-[#1C1917] mb-4" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>
                 Volunteer at Heartland
               </h2>
               <p className="text-[#78716C] leading-relaxed mb-4" style={{fontFamily:'DM Sans, sans-serif'}}>
@@ -124,12 +124,12 @@ export default function GetInvolved() {
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 lg:order-1 rounded-2xl overflow-hidden shadow-lg">
-              <img src={HERO_FOSTER} alt="Foster a pet" className="w-full h-80 object-cover" />
+              <img src={HERO_FOSTER} alt="Foster an animal" className="w-full h-80 object-cover" />
             </div>
             <div className="order-1 lg:order-2">
               <div className="text-[#0D9488] text-xs font-bold uppercase tracking-widest mb-3" style={{fontFamily:'DM Sans, sans-serif'}}>Open Your Home</div>
-              <h2 className="text-3xl md:text-4xl font-black text-[#1C1917] mb-4" style={{fontFamily:'Playfair Display, serif'}}>
-                Foster a Pet
+              <h2 className="text-3xl md:text-4xl font-black text-[#1C1917] mb-4" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>
+                Foster an Animal
               </h2>
               <p className="text-[#78716C] leading-relaxed mb-4" style={{fontFamily:'DM Sans, sans-serif'}}>
                 Fostering is one of the most impactful ways to help animals. By opening your home, you give animals a safe, loving environment to heal, decompress, and learn what it means to live in a home.
@@ -168,7 +168,7 @@ export default function GetInvolved() {
         <div className="container max-w-4xl">
           <div className="text-center mb-8">
             <div className="text-[#C8102E] text-xs font-bold uppercase tracking-widest mb-2" style={{fontFamily:'DM Sans, sans-serif'}}>In-Kind Giving</div>
-            <h2 className="text-3xl font-black text-[#1C1917]" style={{fontFamily:'Playfair Display, serif'}}>Donate Supplies</h2>
+            <h2 className="text-3xl font-black text-[#1C1917]" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>Donate Supplies</h2>
             <p className="text-[#78716C] mt-2 max-w-xl mx-auto text-sm" style={{fontFamily:'DM Sans, sans-serif'}}>
               We always need supplies for our animals. Shop our Amazon Wishlist or drop off items at the shelter during open hours.
             </p>
@@ -211,7 +211,7 @@ export default function GetInvolved() {
         <div className="container max-w-4xl">
           <div className="text-center mb-8">
             <div className="text-[#C8102E] text-xs font-bold uppercase tracking-widest mb-2" style={{fontFamily:'DM Sans, sans-serif'}}>More Ways to Help</div>
-            <h2 className="text-3xl font-black text-[#1C1917]" style={{fontFamily:'Playfair Display, serif'}}>Other Ways to Support</h2>
+            <h2 className="text-3xl font-black text-[#1C1917]" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>Other Ways to Support</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -249,7 +249,7 @@ export default function GetInvolved() {
                 <div className="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center mb-3">
                   {item.icon}
                 </div>
-                <h3 className="font-bold text-[#1C1917] mb-2" style={{fontFamily:'Playfair Display, serif'}}>{item.title}</h3>
+                <h3 className="font-bold text-[#1C1917] mb-2" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>{item.title}</h3>
                 <p className="text-sm text-[#78716C] leading-relaxed mb-4" style={{fontFamily:'DM Sans, sans-serif'}}>{item.desc}</p>
                 <a href={item.href}>
                   <button className="text-sm font-bold flex items-center gap-1 text-[#C8102E] hover:text-[#a00d24] transition-colors" style={{fontFamily:'DM Sans, sans-serif'}}>

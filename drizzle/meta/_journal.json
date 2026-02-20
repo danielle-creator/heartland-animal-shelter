@@ -1,0 +1,34 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1771608241009,
+      "tag": "0000_careful_shriek",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1771608642796,
+      "tag": "0001_curious_beast",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1771612374020,
+      "tag": "0002_dark_shard",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1771613480066,
+      "tag": "0003_secret_the_fallen",
+      "breakpoints": true
+    }
+  ]
+}

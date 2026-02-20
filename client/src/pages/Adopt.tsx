@@ -1,6 +1,6 @@
 /*
  * HEARTLAND ANIMAL SHELTER — Adopt Page
- * Design: Editorial Warmth — red/teal accents, Playfair Display + DM Sans
+ * Design: Editorial Warmth — red/teal accents, Plus Jakarta Sans + DM Sans
  * Sections: Hero, Adoptable Dogs/Cats (Shelterluv embed), How to Adopt, Fees, FAQ
  */
 import { useState } from "react";
@@ -85,13 +85,13 @@ export default function Adopt() {
 
       {/* Page Hero */}
       <section className="relative h-72 md:h-96 overflow-hidden">
-        <img src={HERO_ADOPT} alt="Adopt a pet" className="w-full h-full object-cover object-top" />
+        <img src={HERO_ADOPT} alt="Adopt an animal" className="w-full h-full object-cover object-top" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/65 to-black/30" />
         <div className="absolute inset-0 flex items-center">
           <div className="container">
             <div className="text-[#0D9488] text-xs font-bold uppercase tracking-widest mb-2" style={{fontFamily:'DM Sans, sans-serif'}}>No-Kill Shelter</div>
-            <h1 className="text-4xl md:text-5xl font-black text-white" style={{fontFamily:'Playfair Display, serif'}}>
-              Adopt a Pet
+            <h1 className="text-4xl md:text-5xl font-black text-white" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>
+              Adopt an Animal
             </h1>
             <p className="text-white/90 mt-2 text-lg" style={{fontFamily:'DM Sans, sans-serif'}}>
               When you adopt, you save two lives.
@@ -128,7 +128,7 @@ export default function Adopt() {
       <section id="animals" className="bg-white py-12">
         <div className="container">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-black text-[#1C1917] mb-2" style={{fontFamily:'Playfair Display, serif'}}>
+            <h2 className="text-3xl font-black text-[#1C1917] mb-2" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>
               Meet Our Adoptable Animals
             </h2>
             <p className="text-[#78716C] max-w-xl mx-auto" style={{fontFamily:'DM Sans, sans-serif'}}>
@@ -196,7 +196,7 @@ export default function Adopt() {
         <div className="container">
           <div className="text-center mb-10">
             <div className="text-[#C8102E] text-xs font-bold uppercase tracking-widest mb-2" style={{fontFamily:'DM Sans, sans-serif'}}>Simple Process</div>
-            <h2 className="text-3xl font-black text-[#1C1917]" style={{fontFamily:'Playfair Display, serif'}}>How to Adopt</h2>
+            <h2 className="text-3xl font-black text-[#1C1917]" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>How to Adopt</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {adoptionSteps.map((step) => (
@@ -204,7 +204,7 @@ export default function Adopt() {
                 <div className="w-10 h-10 bg-[#C8102E] text-white rounded-full flex items-center justify-center font-black text-lg mb-4" style={{fontFamily:'DM Sans, sans-serif'}}>
                   {step.step}
                 </div>
-                <h3 className="font-bold text-[#1C1917] mb-2" style={{fontFamily:'Playfair Display, serif'}}>{step.title}</h3>
+                <h3 className="font-bold text-[#1C1917] mb-2" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>{step.title}</h3>
                 <p className="text-sm text-[#78716C] leading-relaxed" style={{fontFamily:'DM Sans, sans-serif'}}>{step.desc}</p>
               </div>
             ))}
@@ -212,7 +212,7 @@ export default function Adopt() {
 
           {/* Requirements */}
           <div className="mt-10 bg-white rounded-xl p-6 md:p-8 shadow-sm">
-            <h3 className="text-xl font-bold text-[#1C1917] mb-4" style={{fontFamily:'Playfair Display, serif'}}>Requirements to Adopt</h3>
+            <h3 className="text-xl font-bold text-[#1C1917] mb-4" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>Requirements to Adopt</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {[
                 "Must be 21 years of age or older with a valid government-issued ID",
@@ -237,7 +237,7 @@ export default function Adopt() {
         <div className="container max-w-4xl">
           <div className="text-center mb-8">
             <div className="text-[#C8102E] text-xs font-bold uppercase tracking-widest mb-2" style={{fontFamily:'DM Sans, sans-serif'}}>Transparent Pricing</div>
-            <h2 className="text-3xl font-black text-[#1C1917]" style={{fontFamily:'Playfair Display, serif'}}>Adoption Fees</h2>
+            <h2 className="text-3xl font-black text-[#1C1917]" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>Adoption Fees</h2>
             <p className="text-[#78716C] mt-2 max-w-xl mx-auto text-sm" style={{fontFamily:'DM Sans, sans-serif'}}>
               Fees cover vaccinations, deworming, microchip, heartworm/FeLV/FIV testing, and spay/neuter. <em>Fees are subject to change.</em>
             </p>
@@ -286,7 +286,7 @@ export default function Adopt() {
         <div className="container max-w-3xl">
           <div className="text-center mb-8">
             <div className="text-[#C8102E] text-xs font-bold uppercase tracking-widest mb-2" style={{fontFamily:'DM Sans, sans-serif'}}>Common Questions</div>
-            <h2 className="text-3xl font-black text-[#1C1917]" style={{fontFamily:'Playfair Display, serif'}}>Adoption FAQ</h2>
+            <h2 className="text-3xl font-black text-[#1C1917]" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>Adoption FAQ</h2>
           </div>
           <div className="bg-white rounded-xl p-6 shadow-sm">
             {faqs.map((faq) => (
@@ -299,7 +299,7 @@ export default function Adopt() {
       {/* CTA */}
       <section className="bg-[#C8102E] py-12">
         <div className="container text-center">
-          <h2 className="text-2xl md:text-3xl font-black text-white mb-4" style={{fontFamily:'Playfair Display, serif'}}>
+          <h2 className="text-2xl md:text-3xl font-black text-white mb-4" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>
             Ready to Find Your New Best Friend?
           </h2>
           <div className="flex flex-wrap justify-center gap-3">

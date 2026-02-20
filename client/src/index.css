@@ -2,7 +2,7 @@
  * HEARTLAND ANIMAL SHELTER — Design System
  * Philosophy: Editorial Warmth
  * Colors: Red #C8102E (urgency/love), Teal #0D9488 (calm/trust), Off-white #FAF7F2 (home warmth)
- * Typography: Playfair Display (display/serif) + DM Sans (body/sans)
+ * Typography: Plus Jakarta Sans (headings/display) + DM Sans (body/sans)
  * Layout: Asymmetric, emotion-first, bold animal photography
  */
 
@@ -50,6 +50,8 @@
   --color-sidebar-ring: var(--sidebar-ring);
   /* Heartland brand colors */
   --color-heartland-red: #C8102E;
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
   --color-heartland-red-dark: #a00d24;
   --color-heartland-teal: #0D9488;
   --color-heartland-teal-dark: #0a7a70;
@@ -103,7 +105,8 @@
     font-family: 'DM Sans', sans-serif;
   }
   h1, h2, h3 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
@@ -250,5 +253,112 @@
   .card-hover:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+  }
+
+  /* ── Fun subtle animations ──────────────────────────────────────────── */
+
+  /* Floating paw print */
+  @keyframes floatPaw {
+    0%, 100% { transform: translateY(0px) rotate(-5deg); opacity: 0.12; }
+    50% { transform: translateY(-12px) rotate(5deg); opacity: 0.18; }
+  }
+  .animate-float-paw {
+    animation: floatPaw 5s ease-in-out infinite;
+  }
+  .animate-float-paw-slow {
+    animation: floatPaw 7s ease-in-out infinite;
+    animation-delay: 1.5s;
+  }
+
+  /* Gentle bounce on CTAs */
+  @keyframes gentleBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+  }
+  .animate-gentle-bounce {
+    animation: gentleBounce 2.5s ease-in-out infinite;
+  }
+
+  /* Fade-in from left */
+  @keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  .animate-fade-in-left {
+    animation: fadeInLeft 0.7s ease forwards;
+  }
+
+  /* Fade-in from right */
+  @keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  .animate-fade-in-right {
+    animation: fadeInRight 0.7s ease forwards;
+  }
+
+  /* Staggered fade-up for cards */
+  .animate-stagger-1 { animation-delay: 0.05s; }
+  .animate-stagger-2 { animation-delay: 0.10s; }
+  .animate-stagger-3 { animation-delay: 0.15s; }
+  .animate-stagger-4 { animation-delay: 0.20s; }
+  .animate-stagger-5 { animation-delay: 0.25s; }
+  .animate-stagger-6 { animation-delay: 0.30s; }
+
+  /* Heartbeat pulse for heart/donate icons */
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    14% { transform: scale(1.15); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.1); }
+    70% { transform: scale(1); }
+  }
+  .animate-heartbeat {
+    animation: heartbeat 2s ease-in-out infinite;
+  }
+
+  /* Shimmer on hero headline */
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+
+  /* Wag tail for pet cards */
+  @keyframes wag {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(8deg); }
+    75% { transform: rotate(-8deg); }
+  }
+  .group:hover .animate-wag {
+    animation: wag 0.5s ease-in-out 2;
+  }
+
+  /* Enhanced card hover lift with shadow */
+  .card-lift {
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+  }
+  .card-lift:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.13);
+  }
+
+  /* Soft pulse ring for CTA buttons */
+  @keyframes pulseRing {
+    0% { box-shadow: 0 0 0 0 rgba(200, 16, 46, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(200, 16, 46, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(200, 16, 46, 0); }
+  }
+  .animate-pulse-ring {
+    animation: pulseRing 2.5s ease-out infinite;
+  }
+
+  /* Teal pulse ring variant */
+  @keyframes pulseRingTeal {
+    0% { box-shadow: 0 0 0 0 rgba(13, 148, 136, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(13, 148, 136, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(13, 148, 136, 0); }
+  }
+  .animate-pulse-ring-teal {
+    animation: pulseRingTeal 2.5s ease-out infinite;
   }
 }

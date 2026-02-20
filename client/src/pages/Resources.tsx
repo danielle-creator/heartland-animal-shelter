@@ -1,6 +1,6 @@
 /*
  * HEARTLAND ANIMAL SHELTER — Resources Page
- * Design: Editorial Warmth — red/teal accents, Playfair Display + DM Sans
+ * Design: Editorial Warmth — red/teal accents, Plus Jakarta Sans + DM Sans
  * Sections: Hero, Pet Surrender, Community Resources, Pet Food Pantry, Vaccine Clinics, Lost & Found, Links
  */
 import { Link } from "wouter";
@@ -62,7 +62,7 @@ export default function Resources() {
         <div className="absolute inset-0 flex items-center">
           <div className="container">
             <div className="text-[#0D9488] text-xs font-bold uppercase tracking-widest mb-2" style={{fontFamily:'DM Sans, sans-serif'}}>Community Support</div>
-            <h1 className="text-4xl md:text-5xl font-black text-white" style={{fontFamily:'Playfair Display, serif'}}>
+            <h1 className="text-4xl md:text-5xl font-black text-white" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>
               Resources
             </h1>
             <p className="text-white/90 mt-2 text-lg" style={{fontFamily:'DM Sans, sans-serif'}}>
@@ -77,7 +77,7 @@ export default function Resources() {
         <div className="container">
           <div className="text-center mb-10">
             <div className="text-[#C8102E] text-xs font-bold uppercase tracking-widest mb-2" style={{fontFamily:'DM Sans, sans-serif'}}>Free Programs</div>
-            <h2 className="text-3xl font-black text-[#1C1917]" style={{fontFamily:'Playfair Display, serif'}}>Community Programs</h2>
+            <h2 className="text-3xl font-black text-[#1C1917]" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>Community Programs</h2>
             <p className="text-[#78716C] mt-2 max-w-xl mx-auto text-sm" style={{fontFamily:'DM Sans, sans-serif'}}>
               Heartland continues to support community members and their pets, with a focus on keeping animals healthy, cared for, and in their homes whenever possible.
             </p>
@@ -91,7 +91,7 @@ export default function Resources() {
                   <div className="flex items-start gap-3 mb-3">
                     <div className="text-3xl">{res.icon}</div>
                     <div>
-                      <h3 className="font-bold text-[#1C1917]" style={{fontFamily:'Playfair Display, serif'}}>{res.title}</h3>
+                      <h3 className="font-bold text-[#1C1917]" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>{res.title}</h3>
                       <div className="text-xs font-semibold mt-0.5" style={{color: res.color, fontFamily:'DM Sans, sans-serif'}}>{res.detail}</div>
                     </div>
                   </div>
@@ -108,7 +108,7 @@ export default function Resources() {
         <div className="container max-w-3xl">
           <div className="text-center mb-8">
             <div className="text-[#C8102E] text-xs font-bold uppercase tracking-widest mb-2" style={{fontFamily:'DM Sans, sans-serif'}}>Need Help?</div>
-            <h2 className="text-3xl font-black text-[#1C1917]" style={{fontFamily:'Playfair Display, serif'}}>Surrendering a Pet</h2>
+            <h2 className="text-3xl font-black text-[#1C1917]" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>Surrendering a Pet</h2>
           </div>
 
           <div className="bg-white rounded-xl p-6 md:p-8 shadow-sm">
@@ -148,7 +148,7 @@ export default function Resources() {
         <div className="container max-w-3xl">
           <div className="text-center mb-8">
             <div className="text-[#C8102E] text-xs font-bold uppercase tracking-widest mb-2" style={{fontFamily:'DM Sans, sans-serif'}}>Missing a Pet?</div>
-            <h2 className="text-3xl font-black text-[#1C1917]" style={{fontFamily:'Playfair Display, serif'}}>Lost & Found Pets</h2>
+            <h2 className="text-3xl font-black text-[#1C1917]" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>Lost & Found Pets</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -190,7 +190,7 @@ export default function Resources() {
         <div className="container max-w-4xl">
           <div className="text-center mb-8">
             <div className="text-[#C8102E] text-xs font-bold uppercase tracking-widest mb-2" style={{fontFamily:'DM Sans, sans-serif'}}>Helpful Links</div>
-            <h2 className="text-3xl font-black text-[#1C1917]" style={{fontFamily:'Playfair Display, serif'}}>External Resources</h2>
+            <h2 className="text-3xl font-black text-[#1C1917]" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>External Resources</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {externalLinks.map((link) => (
@@ -210,7 +210,7 @@ export default function Resources() {
       {/* Contact */}
       <section className="bg-[#1C1917] py-12">
         <div className="container text-center">
-          <h2 className="text-2xl font-black text-white mb-3" style={{fontFamily:'Playfair Display, serif'}}>Have a Question?</h2>
+          <h2 className="text-2xl font-black text-white mb-3" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>Have a Question?</h2>
           <p className="text-gray-400 mb-6 text-sm" style={{fontFamily:'DM Sans, sans-serif'}}>
             Our team is happy to help connect you with the right resources.
           </p>

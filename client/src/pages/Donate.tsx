@@ -1,11 +1,48 @@
 /*
  * HEARTLAND ANIMAL SHELTER — Donate Page
- * Design: Editorial Warmth — red/teal accents, Playfair Display + DM Sans
+ * Design: Editorial Warmth — red/teal accents, Plus Jakarta Sans + DM Sans
  * Sections: Hero, Donate Options, Impact, Monthly Giving, Other Ways to Give
  */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { Heart, CheckCircle, ArrowRight, Star } from "lucide-react";
+import { Heart, CheckCircle, ArrowRight, Star, Building2, Search } from "lucide-react";
+
+// Double the Donation employer search widget
+function DoubleTheDonationWidget() {
+  useEffect(() => {
+    // Replace 'YOUR_DOUBLE_THE_DONATION_KEY' with your actual plugin key from doublethedonation.com
+    const PLUGIN_KEY = "hEjsp4KFXOCUNtzS";
+
+    const scriptId = "dtd-plugin-script";
+    if (!document.getElementById(scriptId)) {
+      const script = document.createElement("script");
+      script.id = scriptId;
+      script.src = "https://doublethedonation.com/api/js/ddplugin.js";
+      script.async = true;
+      document.body.appendChild(script);
+      // Set config before script loads
+      (window as any).DDCONF = { API_KEY: PLUGIN_KEY };
+    }
+  }, []);
+
+  return (
+    <div id="dd-container" className="min-h-[120px]">
+      {/* Double the Donation widget renders here once configured */}
+      <div className="flex flex-col items-center justify-center py-8 bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
+        <Search size={32} className="text-gray-300 mb-2" />
+        <p className="text-gray-500 font-medium text-sm mb-1">Employer Matching Search</p>
+        <p className="text-gray-400 text-xs text-center max-w-xs mb-3">
+          The Double the Donation employer search will appear here once configured by your administrator.
+        </p>
+        <Link href="/matching-gifts">
+          <span className="text-[#0D9488] text-sm font-semibold hover:underline cursor-pointer">
+            Learn more about matching gifts →
+          </span>
+        </Link>
+      </div>
+    </div>
+  );
+}
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
@@ -85,7 +122,7 @@ export default function Donate() {
         <div className="absolute inset-0 flex items-center">
           <div className="container">
             <div className="text-[#0D9488] text-xs font-bold uppercase tracking-widest mb-2" style={{fontFamily:'DM Sans, sans-serif'}}>501(c)(3) Non-Profit</div>
-            <h1 className="text-4xl md:text-5xl font-black text-white" style={{fontFamily:'Playfair Display, serif'}}>
+            <h1 className="text-4xl md:text-5xl font-black text-white" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>
               Donate
             </h1>
             <p className="text-white/90 mt-2 text-lg" style={{fontFamily:'DM Sans, sans-serif'}}>
@@ -103,7 +140,7 @@ export default function Donate() {
             {/* Left: Donate Widget */}
             <div>
               <div className="text-[#C8102E] text-xs font-bold uppercase tracking-widest mb-3" style={{fontFamily:'DM Sans, sans-serif'}}>Make a Gift</div>
-              <h2 className="text-3xl font-black text-[#1C1917] mb-4" style={{fontFamily:'Playfair Display, serif'}}>
+              <h2 className="text-3xl font-black text-[#1C1917] mb-4" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>
                 Support Our Animals
               </h2>
               <p className="text-[#78716C] leading-relaxed mb-6" style={{fontFamily:'DM Sans, sans-serif'}}>
@@ -174,7 +211,7 @@ export default function Donate() {
             {/* Right: Impact */}
             <div>
               <div className="text-[#0D9488] text-xs font-bold uppercase tracking-widest mb-3" style={{fontFamily:'DM Sans, sans-serif'}}>Your Impact</div>
-              <h2 className="text-3xl font-black text-[#1C1917] mb-4" style={{fontFamily:'Playfair Display, serif'}}>
+              <h2 className="text-3xl font-black text-[#1C1917] mb-4" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>
                 What Your Gift Does
               </h2>
               <div className="space-y-3 mb-6">
@@ -216,7 +253,7 @@ export default function Donate() {
               <div className="flex gap-0.5 mb-3">
                 {[...Array(5)].map((_, i) => <Star key={i} size={16} className="text-yellow-300 fill-yellow-300" />)}
               </div>
-              <h2 className="text-3xl font-black text-white mb-4" style={{fontFamily:'Playfair Display, serif'}}>
+              <h2 className="text-3xl font-black text-white mb-4" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>
                 Become a Heartland Hero
               </h2>
               <p className="text-white/90 leading-relaxed mb-4" style={{fontFamily:'DM Sans, sans-serif'}}>
@@ -254,7 +291,7 @@ export default function Donate() {
         <div className="container">
           <div className="text-center mb-8">
             <div className="text-[#C8102E] text-xs font-bold uppercase tracking-widest mb-2" style={{fontFamily:'DM Sans, sans-serif'}}>More Options</div>
-            <h2 className="text-3xl font-black text-[#1C1917]" style={{fontFamily:'Playfair Display, serif'}}>Other Ways to Give</h2>
+            <h2 className="text-3xl font-black text-[#1C1917]" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>Other Ways to Give</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {otherWays.map((item) => (
@@ -273,7 +310,7 @@ export default function Donate() {
 
           {/* Mail a check */}
           <div className="mt-8 bg-white rounded-xl p-6 shadow-sm max-w-lg mx-auto text-center">
-            <h3 className="font-bold text-[#1C1917] mb-2" style={{fontFamily:'Playfair Display, serif'}}>Mail a Check</h3>
+            <h3 className="font-bold text-[#1C1917] mb-2" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>Mail a Check</h3>
             <p className="text-sm text-[#78716C] mb-2" style={{fontFamily:'DM Sans, sans-serif'}}>
               Make checks payable to <strong>Heartland Animal Shelter</strong> and mail to:
             </p>
@@ -284,6 +321,54 @@ export default function Donate() {
             <div className="mt-3 text-xs text-[#78716C]" style={{fontFamily:'DM Sans, sans-serif'}}>
               EIN: 36-4417966 &nbsp;|&nbsp; 501(c)(3) Non-Profit
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Corporate Matching & Payroll Deductions */}
+      <section id="corporate-matching" className="bg-white py-14 border-t border-gray-100">
+        <div className="container max-w-4xl">
+          <div className="text-center mb-8">
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <Building2 size={18} className="text-[#0D9488]" />
+              <div className="text-[#0D9488] text-xs font-bold uppercase tracking-widest" style={{fontFamily:'DM Sans, sans-serif'}}>Double Your Impact</div>
+            </div>
+            <h2 className="text-3xl font-black text-[#1C1917] mb-3" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>
+              Corporate Matching & Payroll Deductions
+            </h2>
+            <p className="text-[#78716C] max-w-xl mx-auto" style={{fontFamily:'DM Sans, sans-serif'}}>
+              Many employers match their employees' charitable donations — sometimes 2:1 or 3:1. Check if your company participates and double or triple your gift to Heartland!
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            {[
+              { stat: "65%", label: "of Fortune 500 companies offer matching programs" },
+              { stat: "$4–7B", label: "in matching funds go unclaimed every year" },
+              { stat: "2–3×", label: "the impact of your donation with employer matching" },
+            ].map((item) => (
+              <div key={item.stat} className="bg-[#FAF7F2] rounded-xl p-5 text-center">
+                <div className="text-2xl font-black text-[#C8102E] mb-1" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>{item.stat}</div>
+                <div className="text-xs text-[#78716C]" style={{fontFamily:'DM Sans, sans-serif'}}>{item.label}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Double the Donation widget */}
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mb-6">
+            <h3 className="font-black text-[#1C1917] mb-1" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>Search Your Employer</h3>
+            <p className="text-sm text-[#78716C] mb-4" style={{fontFamily:'DM Sans, sans-serif'}}>
+              Enter your employer's name to check if they offer a matching gift program and get step-by-step instructions.
+            </p>
+            <DoubleTheDonationWidget />
+          </div>
+
+          <div className="text-center">
+            <Link href="/matching-gifts">
+              <button className="btn-heartland-teal rounded-lg px-6 py-3 text-sm">
+                Full Matching Gifts Guide
+              </button>
+            </Link>
           </div>
         </div>
       </section>

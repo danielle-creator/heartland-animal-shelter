@@ -1,6 +1,6 @@
 /*
  * HEARTLAND ANIMAL SHELTER — About Page
- * Design: Editorial Warmth — red/teal accents, Playfair Display + DM Sans
+ * Design: Editorial Warmth — red/teal accents, Plus Jakarta Sans + DM Sans
  * Sections: Hero, Mission/History, Values, Stats, Staff/Leadership, Strategic Plan
  */
 import { Link } from "wouter";
@@ -53,7 +53,7 @@ export default function About() {
         <div className="absolute inset-0 flex items-center">
           <div className="container">
             <div className="text-[#0D9488] text-xs font-bold uppercase tracking-widest mb-2" style={{fontFamily:'DM Sans, sans-serif'}}>Since 2002</div>
-            <h1 className="text-4xl md:text-5xl font-black text-white" style={{fontFamily:'Playfair Display, serif'}}>
+            <h1 className="text-4xl md:text-5xl font-black text-white" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>
               About Us
             </h1>
             <p className="text-white/90 mt-2 text-lg" style={{fontFamily:'DM Sans, sans-serif'}}>
@@ -69,11 +69,11 @@ export default function About() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
             <div>
               <div className="text-[#C8102E] text-xs font-bold uppercase tracking-widest mb-3" style={{fontFamily:'DM Sans, sans-serif'}}>Our Mission</div>
-              <h2 className="text-3xl font-black text-[#1C1917] mb-4" style={{fontFamily:'Playfair Display, serif'}}>
+              <h2 className="text-3xl font-black text-[#1C1917] mb-4" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>
                 Why We Exist
               </h2>
               <blockquote className="border-l-4 border-[#C8102E] pl-4 mb-6">
-                <p className="text-lg text-[#1C1917] italic leading-relaxed" style={{fontFamily:'Playfair Display, serif'}}>
+                <p className="text-lg text-[#1C1917] italic leading-relaxed" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>
                   "Heartland Animal Shelter provides excellent care to the most vulnerable dogs and cats until we find them good homes. Through progressive programs, outreach, and collaborative partnerships, we also work to keep all companion animals with their families."
                 </p>
               </blockquote>
@@ -83,7 +83,7 @@ export default function About() {
             </div>
             <div>
               <div className="text-[#0D9488] text-xs font-bold uppercase tracking-widest mb-3" style={{fontFamily:'DM Sans, sans-serif'}}>Our History</div>
-              <h2 className="text-3xl font-black text-[#1C1917] mb-4" style={{fontFamily:'Playfair Display, serif'}}>
+              <h2 className="text-3xl font-black text-[#1C1917] mb-4" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>
                 20+ Years of Lifesaving
               </h2>
               <p className="text-[#78716C] leading-relaxed mb-4" style={{fontFamily:'DM Sans, sans-serif'}}>
@@ -124,7 +124,7 @@ export default function About() {
         <div className="container">
           <div className="text-center mb-10">
             <div className="text-[#C8102E] text-xs font-bold uppercase tracking-widest mb-2" style={{fontFamily:'DM Sans, sans-serif'}}>What We Stand For</div>
-            <h2 className="text-3xl font-black text-[#1C1917]" style={{fontFamily:'Playfair Display, serif'}}>Our Values</h2>
+            <h2 className="text-3xl font-black text-[#1C1917]" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>Our Values</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
             {values.map((val) => (
@@ -143,7 +143,7 @@ export default function About() {
         <div className="container max-w-4xl">
           <div className="text-center mb-10">
             <div className="text-[#0D9488] text-xs font-bold uppercase tracking-widest mb-2" style={{fontFamily:'DM Sans, sans-serif'}}>2023–2028</div>
-            <h2 className="text-3xl font-black text-[#1C1917]" style={{fontFamily:'Playfair Display, serif'}}>Our Strategic Plan</h2>
+            <h2 className="text-3xl font-black text-[#1C1917]" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>Our Strategic Plan</h2>
             <p className="text-[#78716C] mt-2 max-w-xl mx-auto text-sm" style={{fontFamily:'DM Sans, sans-serif'}}>
               In 2023, Heartland launched a five-point Strategic Plan, shaped by staff, volunteers, fosters, donors, and community input. The Board of Directors monitors quarterly progress.
             </p>
@@ -174,7 +174,7 @@ export default function About() {
         <div className="container max-w-4xl">
           <div className="text-center mb-10">
             <div className="text-[#C8102E] text-xs font-bold uppercase tracking-widest mb-2" style={{fontFamily:'DM Sans, sans-serif'}}>Our Team</div>
-            <h2 className="text-3xl font-black text-[#1C1917]" style={{fontFamily:'Playfair Display, serif'}}>Heartland Staff</h2>
+            <h2 className="text-3xl font-black text-[#1C1917]" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>Heartland Staff</h2>
           </div>
 
           {/* Leadership */}
@@ -190,7 +190,7 @@ export default function About() {
                 <div>
                   <div className="font-bold text-[#1C1917]" style={{fontFamily:'DM Sans, sans-serif'}}>{leader.name}</div>
                   <div className="text-xs text-[#0D9488] font-semibold mb-2" style={{fontFamily:'DM Sans, sans-serif'}}>{leader.title}</div>
-                  <p className="text-xs text-[#78716C] italic leading-relaxed" style={{fontFamily:'Playfair Display, serif'}}>"{leader.quote}"</p>
+                  <p className="text-xs text-[#78716C] italic leading-relaxed" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>"{leader.quote}"</p>
                 </div>
               </div>
             ))}
@@ -217,7 +217,7 @@ export default function About() {
       {/* Contact CTA */}
       <section className="bg-[#1C1917] py-12">
         <div className="container text-center">
-          <h2 className="text-2xl font-black text-white mb-3" style={{fontFamily:'Playfair Display, serif'}}>Get in Touch</h2>
+          <h2 className="text-2xl font-black text-white mb-3" style={{fontFamily:'Plus Jakarta Sans, sans-serif'}}>Get in Touch</h2>
           <p className="text-gray-400 mb-6 text-sm" style={{fontFamily:'DM Sans, sans-serif'}}>
             586 Palwaukee Drive, Wheeling, IL 60090 &nbsp;|&nbsp; 847-296-6400 &nbsp;|&nbsp; info@heartlandanimalshelter.org
           </p>
