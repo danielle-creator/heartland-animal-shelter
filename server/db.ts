@@ -1,17 +1,21 @@
 import { and, asc, desc, eq, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import {
+  InsertAnimal,
   InsertNewsPost,
   InsertOrder,
   InsertOrderItem,
   InsertProduct,
   InsertProductVariant,
+  InsertSiteContent,
   InsertUser,
+  animals,
   newsPosts,
   orderItems,
   orders,
   productVariants,
   products,
+  siteContent,
   users,
 } from "../drizzle/schema";
 import { ENV } from "./_core/env";
@@ -155,7 +159,6 @@ export async function createOrder(orderData: InsertOrder, items: Omit<InsertOrde
   const orderId = result.id;
   const itemsWithOrderId = items.map((item) => ({ ...item, orderId }));
   await db.insert(orderItems).values(itemsWithOrderId);
-  // Decrement stock
   for (const item of items) {
     if (item.variantId) {
       await db
@@ -252,4 +255,119 @@ export async function deletePost(id: number) {
   const db = await getDb();
   if (!db) throw new Error("DB not available");
   await db.delete(newsPosts).where(eq(newsPosts.id, id));
+}
+
+// ─── Site Content (CMS) ───────────────────────────────────────────────────────
+export async function getAllSiteContent() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(siteContent).orderBy(asc(siteContent.section), asc(siteContent.key));
+}
+
+export async function getSiteContentBySection(section: string) {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(siteContent).where(eq(siteContent.section, section));
+}
+
+export async function getSiteContentByKey(key: string) {
+  const db = await getDb();
+  if (!db) return undefined;
+  const result = await db.select().from(siteContent).where(eq(siteContent.key, key)).limit(1);
+  return result[0];
+}
+
+export async function upsertSiteContent(
+  key: string,
+  value: string,
+  label?: string,
+  contentType?: string,
+  section?: string
+) {
+  const db = await getDb();
+  if (!db) throw new Error("DB not available");
+  const existing = await getSiteContentByKey(key);
+  if (existing) {
+    await db
+      .update(siteContent)
+      .set({
+        value,
+        ...(label ? { label } : {}),
+        ...(contentType ? { contentType } : {}),
+        ...(section ? { section } : {}),
+      })
+      .where(eq(siteContent.key, key));
+  } else {
+    await db.insert(siteContent).values({
+      key,
+      value,
+      label: label ?? key,
+      contentType: contentType ?? "text",
+      section: section ?? "general",
+    });
+  }
+}
+
+export async function bulkUpsertSiteContent(
+  items: { key: string; value: string; label?: string; contentType?: string; section?: string }[]
+) {
+  for (const item of items) {
+    await upsertSiteContent(item.key, item.value, item.label, item.contentType, item.section);
+  }
+}
+
+// ─── Animals ──────────────────────────────────────────────────────────────────
+export async function getAllAnimals() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(animals).orderBy(asc(animals.sortOrder), desc(animals.createdAt));
+}
+
+export async function getAvailableAnimals(species?: "dog" | "cat" | "other") {
+  const db = await getDb();
+  if (!db) return [];
+  const conditions: ReturnType<typeof eq>[] = [eq(animals.status, "available")];
+  if (species) conditions.push(eq(animals.species, species));
+  return db
+    .select()
+    .from(animals)
+    .where(and(...conditions))
+    .orderBy(asc(animals.sortOrder), desc(animals.featured));
+}
+
+export async function getFeaturedAnimals(limit = 6) {
+  const db = await getDb();
+  if (!db) return [];
+  return db
+    .select()
+    .from(animals)
+    .where(and(eq(animals.status, "available"), eq(animals.featured, true)))
+    .orderBy(asc(animals.sortOrder))
+    .limit(limit);
+}
+
+export async function getAnimalById(id: number) {
+  const db = await getDb();
+  if (!db) return undefined;
+  const result = await db.select().from(animals).where(eq(animals.id, id)).limit(1);
+  return result[0];
+}
+
+export async function createAnimal(data: InsertAnimal) {
+  const db = await getDb();
+  if (!db) throw new Error("DB not available");
+  const [result] = await db.insert(animals).values(data).$returningId();
+  return result.id;
+}
+
+export async function updateAnimal(id: number, data: Partial<InsertAnimal>) {
+  const db = await getDb();
+  if (!db) throw new Error("DB not available");
+  await db.update(animals).set(data).where(eq(animals.id, id));
+}
+
+export async function deleteAnimal(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("DB not available");
+  await db.delete(animals).where(eq(animals.id, id));
 }

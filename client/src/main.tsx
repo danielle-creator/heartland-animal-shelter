@@ -11,6 +11,8 @@ import "./index.css";
 const queryClient = new QueryClient();
 
 const redirectToLoginIfUnauthorized = (error: unknown) => {
+  // Never redirect in development mode — no auth server is available
+  if (import.meta.env.DEV) return;
   if (!(error instanceof TRPCClientError)) return;
   if (typeof window === "undefined") return;
 

@@ -33,9 +33,7 @@ export const products = mysqlTable("products", {
   salePrice: decimal("salePrice", { precision: 10, scale: 2 }),
   imageUrl: text("imageUrl"),
   category: varchar("category", { length: 100 }),
-  /** Whether this product has size/color variants */
   hasVariants: boolean("hasVariants").default(false).notNull(),
-  /** Total stock for products without variants */
   stock: int("stock").default(0).notNull(),
   active: boolean("active").default(true).notNull(),
   sortOrder: int("sortOrder").default(0).notNull(),
@@ -45,15 +43,12 @@ export const products = mysqlTable("products", {
 export type Product = typeof products.$inferSelect;
 export type InsertProduct = typeof products.$inferInsert;
 
-// ─── Product Variants (size/color options) ────────────────────────────────────
+// ─── Product Variants ─────────────────────────────────────────────────────────
 export const productVariants = mysqlTable("product_variants", {
   id: int("id").autoincrement().primaryKey(),
   productId: int("productId").notNull(),
-  /** e.g. "S", "M", "L", "XL", "One Size" */
   size: varchar("size", { length: 50 }),
-  /** e.g. "Red", "Blue", "Teal" */
   color: varchar("color", { length: 50 }),
-  /** Override price for this variant (null = use product price) */
   price: decimal("price", { precision: 10, scale: 2 }),
   stock: int("stock").default(0).notNull(),
   sku: varchar("sku", { length: 100 }),
@@ -67,7 +62,6 @@ export type InsertProductVariant = typeof productVariants.$inferInsert;
 // ─── Orders ───────────────────────────────────────────────────────────────────
 export const orders = mysqlTable("orders", {
   id: int("id").autoincrement().primaryKey(),
-  /** Stripe payment intent or session ID */
   stripePaymentId: varchar("stripePaymentId", { length: 255 }),
   status: mysqlEnum("status", ["pending", "paid", "fulfilled", "cancelled", "refunded"])
     .default("pending")
@@ -113,7 +107,6 @@ export const newsPosts = mysqlTable("news_posts", {
   published: boolean("published").default(false).notNull(),
   publishedAt: timestamp("publishedAt"),
   authorName: varchar("authorName", { length: 255 }).default("Heartland Team"),
-  /** Spanish translations (auto-generated via AI) */
   titleEs: varchar("titleEs", { length: 500 }),
   excerptEs: text("excerptEs"),
   bodyEs: text("bodyEs"),
@@ -155,9 +148,7 @@ export const fosterApplications = mysqlTable("foster_applications", {
   address: text("address"),
   city: varchar("city", { length: 100 }),
   zip: varchar("zip", { length: 20 }),
-  /** Type of animal they want to foster */
   animalPreference: varchar("animalPreference", { length: 100 }),
-  /** e.g. kittens, puppies, seniors, medical, behavioral */
   fosterType: varchar("fosterType", { length: 255 }),
   homeType: varchar("homeType", { length: 100 }),
   hasChildren: boolean("hasChildren").default(false),
@@ -173,3 +164,52 @@ export const fosterApplications = mysqlTable("foster_applications", {
 });
 export type FosterApplication = typeof fosterApplications.$inferSelect;
 export type InsertFosterApplication = typeof fosterApplications.$inferInsert;
+
+// ─── Site Content (CMS) ───────────────────────────────────────────────────────
+// Key-value store for all editable page content. Each "key" is a dot-path like
+// "home.hero.0.headline" and the value is a JSON-encoded string or object.
+export const siteContent = mysqlTable("site_content", {
+  id: int("id").autoincrement().primaryKey(),
+  /** Dot-path key, e.g. "home.hero.headline" or "settings.contact.phone" */
+  key: varchar("key", { length: 255 }).notNull().unique(),
+  /** JSON-encoded value */
+  value: text("value").notNull(),
+  /** Human-readable label for the CMS UI */
+  label: varchar("label", { length: 255 }),
+  /** Content type hint: text | richtext | image | url | color | boolean | json */
+  contentType: varchar("contentType", { length: 50 }).default("text"),
+  /** Which CMS section this belongs to */
+  section: varchar("section", { length: 100 }),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type SiteContent = typeof siteContent.$inferSelect;
+export type InsertSiteContent = typeof siteContent.$inferInsert;
+
+// ─── Animals (Adoptable Pets) ─────────────────────────────────────────────────
+export const animals = mysqlTable("animals", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 100 }).notNull(),
+  species: mysqlEnum("species", ["dog", "cat", "other"]).default("dog").notNull(),
+  breed: varchar("breed", { length: 100 }),
+  age: varchar("age", { length: 50 }),
+  sex: mysqlEnum("sex", ["male", "female", "unknown"]).default("unknown"),
+  size: mysqlEnum("size", ["small", "medium", "large", "xlarge"]).default("medium"),
+  color: varchar("color", { length: 100 }),
+  description: text("description"),
+  imageUrl: text("imageUrl"),
+  status: mysqlEnum("status", ["available", "pending", "adopted", "foster", "hold"]).default("available").notNull(),
+  goodWithKids: boolean("goodWithKids").default(true),
+  goodWithDogs: boolean("goodWithDogs").default(true),
+  goodWithCats: boolean("goodWithCats").default(true),
+  specialNeeds: boolean("specialNeeds").default(false),
+  specialNeedsNote: text("specialNeedsNote"),
+  adoptionFee: decimal("adoptionFee", { precision: 8, scale: 2 }),
+  intakeDate: timestamp("intakeDate"),
+  sortOrder: int("sortOrder").default(0).notNull(),
+  featured: boolean("featured").default(false).notNull(),
+  externalId: varchar("externalId", { length: 100 }),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type Animal = typeof animals.$inferSelect;
+export type InsertAnimal = typeof animals.$inferInsert;

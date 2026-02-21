@@ -1,25 +1,36 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import {
+  bulkUpsertSiteContent,
+  createAnimal,
   createOrder,
   createPost,
   createProduct,
   createVariant,
+  deleteAnimal,
   deletePost,
   deleteProduct,
   deleteVariant,
+  getAllAnimals,
   getAllOrders,
   getAllPosts,
   getAllProducts,
+  getAllSiteContent,
+  getAnimalById,
+  getAvailableAnimals,
+  getFeaturedAnimals,
   getOrderWithItems,
   getPostById,
   getPostBySlug,
   getProductWithVariants,
   getPublishedPosts,
+  getSiteContentBySection,
+  updateAnimal,
   updateOrderStatus,
   updatePost,
   updateProduct,
   updateVariant,
+  upsertSiteContent,
 } from "./db";
 import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
@@ -337,6 +348,154 @@ const adminRouter = router({
     }),
 });
 
+// ─── Animals (public) ────────────────────────────────────────────────────────
+const animalsRouter = router({
+  listAvailable: publicProcedure
+    .input(z.object({ species: z.enum(["dog", "cat", "other"]).optional() }).optional())
+    .query(async ({ input }) => getAvailableAnimals(input?.species)),
+
+  listFeatured: publicProcedure
+    .input(z.object({ limit: z.number().optional() }).optional())
+    .query(async ({ input }) => getFeaturedAnimals(input?.limit ?? 6)),
+
+  get: publicProcedure
+    .input(z.object({ id: z.number() }))
+    .query(async ({ input }) => {
+      const a = await getAnimalById(input.id);
+      if (!a) throw new TRPCError({ code: "NOT_FOUND" });
+      return a;
+    }),
+});
+
+// ─── CMS Content (public read) ────────────────────────────────────────────────
+const cmsRouter = router({
+  getSection: publicProcedure
+    .input(z.object({ section: z.string() }))
+    .query(async ({ input }) => getSiteContentBySection(input.section)),
+
+  getAll: publicProcedure.query(async () => getAllSiteContent()),
+});
+
+// ─── Admin: Animals ───────────────────────────────────────────────────────────
+const adminAnimalsRouter = router({
+  list: adminProcedure.query(async () => getAllAnimals()),
+
+  create: adminProcedure
+    .input(
+      z.object({
+        name: z.string(),
+        species: z.enum(["dog", "cat", "other"]).default("dog"),
+        breed: z.string().optional(),
+        age: z.string().optional(),
+        sex: z.enum(["male", "female", "unknown"]).optional(),
+        size: z.enum(["small", "medium", "large", "xlarge"]).optional(),
+        color: z.string().optional(),
+        description: z.string().optional(),
+        imageUrl: z.string().optional(),
+        status: z.enum(["available", "pending", "adopted", "foster", "hold"]).default("available"),
+        goodWithKids: z.boolean().optional(),
+        goodWithDogs: z.boolean().optional(),
+        goodWithCats: z.boolean().optional(),
+        specialNeeds: z.boolean().optional(),
+        specialNeedsNote: z.string().optional(),
+        adoptionFee: z.string().optional(),
+        featured: z.boolean().optional(),
+        sortOrder: z.number().optional(),
+      })
+    )
+    .mutation(async ({ input }) => {
+      const id = await createAnimal({
+        ...input,
+        featured: input.featured ?? false,
+        sortOrder: input.sortOrder ?? 0,
+      });
+      return { success: true, id };
+    }),
+
+  update: adminProcedure
+    .input(
+      z.object({
+        id: z.number(),
+        name: z.string().optional(),
+        species: z.enum(["dog", "cat", "other"]).optional(),
+        breed: z.string().optional(),
+        age: z.string().optional(),
+        sex: z.enum(["male", "female", "unknown"]).optional(),
+        size: z.enum(["small", "medium", "large", "xlarge"]).optional(),
+        color: z.string().optional(),
+        description: z.string().optional(),
+        imageUrl: z.string().optional(),
+        status: z.enum(["available", "pending", "adopted", "foster", "hold"]).optional(),
+        goodWithKids: z.boolean().optional(),
+        goodWithDogs: z.boolean().optional(),
+        goodWithCats: z.boolean().optional(),
+        specialNeeds: z.boolean().optional(),
+        specialNeedsNote: z.string().optional(),
+        adoptionFee: z.string().optional(),
+        featured: z.boolean().optional(),
+        sortOrder: z.number().optional(),
+      })
+    )
+    .mutation(async ({ input }) => {
+      const { id, ...data } = input;
+      await updateAnimal(id, data);
+      return { success: true };
+    }),
+
+  delete: adminProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ input }) => {
+      await deleteAnimal(input.id);
+      return { success: true };
+    }),
+
+  reorder: adminProcedure
+    .input(z.array(z.object({ id: z.number(), sortOrder: z.number() })))
+    .mutation(async ({ input }) => {
+      for (const item of input) {
+        await updateAnimal(item.id, { sortOrder: item.sortOrder });
+      }
+      return { success: true };
+    }),
+});
+
+// ─── Admin: CMS Content ───────────────────────────────────────────────────────
+const adminCmsRouter = router({
+  getAll: adminProcedure.query(async () => getAllSiteContent()),
+
+  set: adminProcedure
+    .input(
+      z.object({
+        key: z.string(),
+        value: z.string(),
+        label: z.string().optional(),
+        contentType: z.string().optional(),
+        section: z.string().optional(),
+      })
+    )
+    .mutation(async ({ input }) => {
+      await upsertSiteContent(input.key, input.value, input.label, input.contentType, input.section);
+      return { success: true };
+    }),
+
+  bulkSet: adminProcedure
+    .input(
+      z.array(
+        z.object({
+          key: z.string(),
+          value: z.string(),
+          label: z.string().optional(),
+          contentType: z.string().optional(),
+          section: z.string().optional(),
+        })
+      )
+    )
+    .mutation(async ({ input }) => {
+      await bulkUpsertSiteContent(input);
+      return { success: true };
+    }),
+});
+
 export const appRouter = router({
   system: systemRouter,
   auth: router({
@@ -349,7 +508,11 @@ export const appRouter = router({
   }),
   shop: shopRouter,
   news: newsRouter,
+  animals: animalsRouter,
+  cms: cmsRouter,
   admin: adminRouter,
+  adminAnimals: adminAnimalsRouter,
+  adminCms: adminCmsRouter,
 });
 
 export type AppRouter = typeof appRouter;

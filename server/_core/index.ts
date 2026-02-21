@@ -4,6 +4,7 @@ import { createServer } from "http";
 import net from "net";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./oauth";
+import { registerUploadRoutes } from "../uploadRouter";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
@@ -35,6 +36,38 @@ async function startServer() {
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
+  // Image upload endpoint
+  registerUploadRoutes(app as any);
+  // Dev-only admin login bypass (never runs in production)
+  if (process.env.NODE_ENV !== "production") {
+    app.get("/api/dev-admin-login", async (req, res) => {
+      try {
+        const { upsertUser } = await import("../db");
+        const { sdk } = await import("./sdk");
+        const { getSessionCookieOptions } = await import("./cookies");
+        const { COOKIE_NAME, ONE_YEAR_MS } = await import("../../shared/const");
+        const devOpenId = "dev-admin-001";
+        await upsertUser({
+          openId: devOpenId,
+          name: "Dev Admin",
+          email: "admin@heartlandanimalshelter.org",
+          loginMethod: "dev",
+          lastSignedIn: new Date(),
+          role: "admin",
+        });
+        const sessionToken = await sdk.createSessionToken(devOpenId, {
+          name: "Dev Admin",
+          expiresInMs: ONE_YEAR_MS,
+        });
+        const cookieOptions = getSessionCookieOptions(req);
+        res.cookie(COOKIE_NAME, sessionToken, { ...cookieOptions, maxAge: ONE_YEAR_MS });
+        res.redirect(302, "/admin");
+      } catch (err) {
+        console.error("[DevLogin] Error:", err);
+        res.status(500).json({ error: String(err) });
+      }
+    });
+  }
   // tRPC API
   app.use(
     "/api/trpc",
